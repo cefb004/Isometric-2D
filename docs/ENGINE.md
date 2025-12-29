@@ -26,7 +26,7 @@ Mini-engine organizes update/draw per entity (player, enemies, projectiles, map)
 
 Supports modular game states (menu, gameplay, pause, etc.).
 
-3.2 Input Handling
+### 3.2 Input Handling
 
 Keyboard: WASD / arrow keys.
 
@@ -36,7 +36,7 @@ Future touchscreen: abstracted virtual controls.
 
 Converts input to isometric movement vectors.
 
-3.3 Sprite and Animation System
+### 3.3 Sprite and Animation System
 
 Spritesheet support with quads for multiple states and directions.
 
@@ -58,7 +58,7 @@ sprite.lua
      ├─ update(dt)
      └─ draw(x, y)
 ```
-3.4 Camera System
+### 3.4 Camera System
 
 Isometric camera (2:1 ratio) with smooth following.
 
@@ -66,7 +66,7 @@ Uses HUMP camera library or a custom Lua implementation.
 
 Handles viewport translation for map scrolling.
 
-3.5 Map / Tilemap System
+### 3.5 Map / Tilemap System
 
 Supports isometric tilemaps.
 
@@ -80,7 +80,7 @@ Can load maps manually or via Tiled + STI.
 
 Handles efficient rendering, only drawing visible tiles.
 
-3.6 Asset Management
+### 3.6 Asset Management
 
 Centralized loading for:
 
@@ -94,7 +94,7 @@ Keeps assets in tables for easy access.
 
 Supports lazy loading or preloading depending on game needs.
 
-3.7 Audio System
+### 3.7 Audio System
 
 Plays background music and sound effects.
 
@@ -104,7 +104,7 @@ Supports volume control per channel (music / sfx).
 
 Future: positional audio for immersion.
 
-3.8 Utilities
+### 3.8 Utilities
 
 Timers (via HUMP timer or custom Lua timers).
 
