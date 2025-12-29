@@ -1,6 +1,6 @@
-ROADMAP.md – IsometricGL (Love2D / Lua)
-1. Project Phases
-Phase 1 – Foundation
+# ROADMAP.md – IsometricGL (Love2D / Lua)
+## 1. Project Phases
+### Phase 1 – Foundation
 
 Goal: Set up the minimal Love2D engine and basic game structure.
 Tasks:
@@ -8,7 +8,7 @@ Tasks:
 Install Love2D and configure development environment.
 
 Set up project directory structure:
-´´´
+```
 /IsometricGL
  ├─ main.lua
  ├─ conf.lua
@@ -20,7 +20,7 @@ Set up project directory structure:
  │   ├─ player.lua
  │   └─ enemy.lua
  └─ libs/
-´´´
+```
 Create mini-engine modules:
 
 sprite.lua – animation & spritesheets
@@ -35,7 +35,7 @@ Implement basic hot-reload friendly structure.
 
 Test main loop, window, and asset loading.
 
-Phase 2 – Player and Animation
+### Phase 2 – Player and Animation
 
 Goal: Implement 8-directional player movement with animations.
 Tasks:
@@ -56,7 +56,7 @@ Integrate camera following player.
 
 Test smooth animation and input responsiveness.
 
-Phase 3 – Map and Tile Rendering
+### Phase 3 – Map and Tile Rendering
 
 Goal: Display isometric tilemap.
 Tasks:
@@ -71,7 +71,7 @@ Optimize rendering (only visible tiles).
 
 Optionally integrate STI for Tiled maps for future levels.
 
-Phase 4 – Enemies and Combat
+### Phase 4 – Enemies and Combat
 
 Goal: Add enemies and basic combat mechanics.
 Tasks:
@@ -90,7 +90,7 @@ Add damage, hit, death states.
 
 Test gameplay loop: explore → fight → loot.
 
-Phase 5 – Loot and Character Progression
+### Phase 5 – Loot and Character Progression
 
 Goal: Introduce loot, inventory, and character growth.
 Tasks:
@@ -103,7 +103,7 @@ Implement leveling/upgrade mechanics (stats increase).
 
 Integrate visual feedback for item pickup.
 
-Phase 6 – Audio and FX
+### Phase 6 – Audio and FX
 
 Goal: Add sound and visual polish.
 Tasks:
@@ -116,7 +116,7 @@ Optional: implement particle effects for attacks or spells.
 
 Ensure retro arcade aesthetic is preserved.
 
-Phase 7 – UI and Menus
+### Phase 7 – UI and Menus
 
 Goal: Build minimal user interface.
 Tasks:
@@ -129,7 +129,7 @@ Inventory screen (basic).
 
 Pause menu functionality.
 
-Phase 8 – Optimization and Portability
+### Phase 8 – Optimization and Portability
 
 Goal: Ensure smooth performance and cross-platform support.
 Tasks:
@@ -154,7 +154,7 @@ Prepare for Android port (Love2D wrapper).
 | Phase 8 – Optimization | Smooth performance, cross-platform readiness                        |
 
 
-3. Notes
+## 2. Notes
 
 All phases reuse mini-engine modules; no redundant code.
 
