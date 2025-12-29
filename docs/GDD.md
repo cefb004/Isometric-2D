@@ -1,5 +1,5 @@
-Game Design Document (GDD) – Love2D / Lua Version
-1. Overview
+# Game Design Document (GDD) – Love2D / Lua Version
+## 1. Overview
 
 Temporary name: Abyss Forge
 
@@ -15,7 +15,7 @@ Business model: Premium (low price, e.g., ~US$2)
 
 This project combines Game Design and Game Development simultaneously. The game evolves together with a minimal Love2D-based engine, following a retro philosophy inspired by Neo Geo (1990s), while using a modern, lightweight technical architecture in Lua.
 
-2. Project Philosophy
+## 2. Project Philosophy
 
 A minimal engine built specifically for this game using Love2D/Lua.
 
@@ -35,7 +35,7 @@ The engine exists to serve the game, not the other way around.
 
 Lua allows fast iteration, hot reload, and simpler code for 2D games.
 
-3. Minimal Game Engine (IsometricGL)
+## 3. Minimal Game Engine (IsometricGL)
 
 Engine Responsibilities
 
@@ -65,7 +65,7 @@ Advanced scripting (Lua is embedded already)
 
 Networking / online multiplayer
 
-4. Visual Style
+## 4. Visual Style
 
 Base Resolution
 
@@ -97,7 +97,7 @@ Directions: 8 isometric directions
 
 One spritesheet per state (idle, walk, attack)
 
-5. Color Palette
+## 5. Color Palette
 
 Limit of 32 colors per character
 
@@ -107,7 +107,7 @@ High contrast for readability
 
 Avoid smooth gradients (classic arcade look)
 
-6. Camera and Perspective
+## 6. Camera and Perspective
 
 Classic isometric (2:1)
 
@@ -117,7 +117,7 @@ Smooth scrolling
 
 Implemented using HUMP camera library or custom Lua logic
 
-7. Gameplay
+## 7. Gameplay
 
 Core Loop
 
@@ -139,7 +139,7 @@ Simple and special attacks
 
 Enemies encountered in groups
 
-8. Controls
+## 8. Controls
 
 Desktop
 
@@ -153,7 +153,7 @@ Touchscreen
 
 Virtual controls
 
-9. Audio
+## 9. Audio
 
 Medieval fantasy soundtrack
 
@@ -163,8 +163,8 @@ Simple and impactful sound effects
 
 Preferably royalty-free assets
 
-10. Repository Structure (Documentation)
-´´´
+## 10. Repository Structure (Documentation)
+```
 /IsometricGL
  ├─ README.md
  ├─ docs/
@@ -179,7 +179,7 @@ Preferably royalty-free assets
  │   ├─ player.lua
  │   └─ map.lua
  └─ libs/
-´´´
+```
 
 README.md: technical overview
 
@@ -189,7 +189,7 @@ ENGINE.md: engine technical decisions
 
 ROADMAP.md: planned features and milestones
 
-11. Current Project Status
+## 11. Current Project Status
 
 Temporary name defined: Abyss Forge
 
