@@ -1,100 +1,119 @@
--- main.lua
+-- =========================
+-- CONFIG
+-- =========================
+local SCALE = 4
+local FRAME_WIDTH  = 64
+local FRAME_HEIGHT = 96
+local WALK_FRAMES  = 4
+local FRAME_TIME   = 0.12
 
-local SCALE = 5
-local SPEED = 200 -- pixels por segundo
+-- =========================
+-- PLAYER
+-- =========================
+local player = {
+    x = 200,
+    y = 200,
+    speed = 120,
+    direction = "down",
+    moving = false
+}
 
--- Sprites
-local idleImage
-local attackImage
-
--- Attack animation
-local attackFrames = {}
+-- =========================
+-- ANIMATION
+-- =========================
+local sprite
+local animations = {}
 local currentFrame = 1
-local frameTimer = 0
-local frameDuration = 0.1
-local isAttacking = false
+local timer = 0
 
--- Personagem
-local x, y
-local direction = "down" -- atualmente apenas para referência futura
+-- Direções → linhas do spritesheet
+local directions = {
+    right = 1,  -- 1ª linha
+    left  = 2,  -- 2ª linha
+    up    = 3,  -- 3ª linha
+    down  = 3   -- 4ª linha
+}
 
+-- =========================
+-- LOAD
+-- =========================
 function love.load()
-    x = 100
-    y = 100
+    love.graphics.setDefaultFilter("nearest", "nearest")
 
-    -- Carrega imagens
-    idleImage = love.graphics.newImage("assets/sprites/barbarian_idle.png")
-    attackImage = love.graphics.newImage("assets/sprites/barbarian_attack.png")
+    sprite = love.graphics.newImage("assets/sprites/barbarian_walk.png")
 
-    -- Cria quads para ataque
-    local attackWidth = attackImage:getWidth() / 4
-    local attackHeight = attackImage:getHeight()
-    for i = 0, 3 do
-        attackFrames[i + 1] = love.graphics.newQuad(
-            i * attackWidth, 0, attackWidth, attackHeight,
-            attackImage:getDimensions()
-        )
-    end
-end
+    -- Criação dos quads
+    for dir, row in pairs(directions) do
+        animations[dir] = {}
 
-function love.update(dt)
-    local moveX, moveY = 0, 0
-
-    -- Movimento com setas
-    if love.keyboard.isDown("up") then
-        moveY = moveY - 1
-        direction = "up"
-    elseif love.keyboard.isDown("down") then
-        moveY = moveY + 1
-        direction = "down"
-    end
-    if love.keyboard.isDown("left") then
-        moveX = moveX - 1
-        direction = "left"
-    elseif love.keyboard.isDown("right") then
-        moveX = moveX + 1
-        direction = "right"
-    end
-
-    -- Normaliza diagonal
-    if moveX ~= 0 and moveY ~= 0 then
-        local norm = math.sqrt(moveX^2 + moveY^2)
-        moveX = moveX / norm
-        moveY = moveY / norm
-    end
-
-    -- Atualiza posição
-    x = x + moveX * SPEED * dt
-    y = y + moveY * SPEED * dt
-
-    -- Atualiza ataque
-    if isAttacking then
-        frameTimer = frameTimer + dt
-        if frameTimer >= frameDuration then
-            frameTimer = frameTimer - frameDuration
-            currentFrame = currentFrame + 1
-            if currentFrame > #attackFrames then
-                currentFrame = 1
-                isAttacking = false
-            end
+        for col = 1, WALK_FRAMES do
+            local quad = love.graphics.newQuad(
+                (col - 1) * FRAME_WIDTH,
+                (row - 1) * FRAME_HEIGHT,
+                FRAME_WIDTH,
+                FRAME_HEIGHT,
+                sprite:getDimensions()
+            )
+            table.insert(animations[dir], quad)
         end
     end
 end
 
-function love.draw()
-    if isAttacking then
-        local attackQuad = attackFrames[currentFrame]
-        love.graphics.draw(attackImage, attackQuad, x, y, 0, SCALE, SCALE)
+-- =========================
+-- UPDATE
+-- =========================
+function love.update(dt)
+    player.moving = false
+
+    -- Movimento
+    if love.keyboard.isDown("right") then
+        player.x = player.x + player.speed * dt
+        player.direction = "right"
+        player.moving = true
+    elseif love.keyboard.isDown("left") then
+        player.x = player.x - player.speed * dt
+        player.direction = "left"
+        player.moving = true
+    elseif love.keyboard.isDown("up") then
+        player.y = player.y - player.speed * dt
+        player.direction = "up"
+        player.moving = true
+    elseif love.keyboard.isDown("down") then
+        player.y = player.y + player.speed * dt
+        player.direction = "down"
+        player.moving = true
+    end
+
+    -- Animação
+    if player.moving then
+        timer = timer + dt
+        if timer >= FRAME_TIME then
+            timer = 0
+            currentFrame = currentFrame + 1
+            if currentFrame > WALK_FRAMES then
+                currentFrame = 1
+            end
+        end
     else
-        love.graphics.draw(idleImage, x, y, 0, SCALE, SCALE)
+        currentFrame = 1 -- parado = primeiro frame
+        timer = 0
     end
 end
 
-function love.keypressed(key)
-    if key == "space" and not isAttacking then
-        isAttacking = true
-        currentFrame = 1
-        frameTimer = 0
-    end
+-- =========================
+-- DRAW
+-- =========================
+function love.draw()
+    love.graphics.draw(
+        sprite,
+        animations[player.direction][currentFrame],
+        player.x,
+        player.y,
+        0,
+        SCALE,
+        SCALE,
+        FRAME_WIDTH / 2,
+        FRAME_HEIGHT
+    )
 end
 
